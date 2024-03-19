@@ -1,13 +1,13 @@
-body{
+body {
     background-color: rgb(36, 47, 53);
     color: #fff;
 }
-.header{
+.header {
     display: flex;
     justify-content: center;
     margin-top: 40px;
 }
-.container{
+.container {
     display: flex;
     justify-content: center;
     justify-content: space-between;
@@ -15,14 +15,14 @@ body{
     max-width: 600px;
     min-width: 550px;
 }
-.left{
+.left {
     font-size: 30px;
     padding: 5px 0px;
 }
-.right{
+.right {
     display: flex;
 }
-button{
+button {
     font-size: 30px;
     background-color: rgb(36, 47, 53);
     border-radius: 10px;
@@ -30,20 +30,22 @@ button{
     color: #fff;
     padding: 5px 15px;
 }
-#id1{
+.id1 {
     background-color: rgb(22, 26, 30);
 }
-input{
+.right .button:active{
+    background-color: rgb(48, 107, 166);
+}
+input {
     font-size: 30px;
     background-color: rgb(36, 47, 53);
-    color: #fffa;
+    color: #fff;
 }
-.add{
+.add {
     background-color: rgb(22, 26, 30);
     padding: 10px 30px;
 }
-
-ul{
+ul {
     padding: 0px;
 }
 li {
@@ -58,7 +60,6 @@ li {
     position: relative;
     font-size: 30px;
 }
-
 li::before {
     content: "";
     position: absolute;
@@ -69,12 +70,22 @@ li::before {
     background-color: red;
     border-radius: 5px;
 }
-
+li.selected::before {
+    background-color: greenyellow;
+}
 li .delete-icon {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 60px;
     transform: translateY(-50%);
     color: #ff3333;
     cursor: pointer;
-  }
+}
+li .edit-icon {
+    position: absolute;
+    top: 53%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: rgb(28, 210, 15);
+    cursor: pointer;
+}
