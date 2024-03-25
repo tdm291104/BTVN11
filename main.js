@@ -6,14 +6,19 @@ function addItem() {
         var contentList = document.getElementById("contentList");
         var li = document.createElement("li");
         li.textContent = content;
-        li.setAttribute('data-status', 'undone'); // Set initial status
+        li.setAttribute('data-status', 'undone');
+
+        if (document.querySelector('.header .right button.id1').textContent === "Done") {
+            li.style.display = "none";
+        }
 
         var deleteIcon = document.createElement("i");
         deleteIcon.classList.add("fa", "fa-trash-o", "delete-icon");
         deleteIcon.setAttribute("aria-hidden", "true");
         deleteIcon.onclick = function() {
             contentList.removeChild(li); 
-            saveList(); 
+            saveList();
+            alert("Xóa thành công"); 
         };
 
         var editIcon = document.createElement("i");
@@ -33,6 +38,7 @@ function addItem() {
                 document.getElementById("content").value = "";
                 li.appendChild(deleteIcon); 
                 li.appendChild(editIcon); 
+                alert("Sửa thành công");
             };
         };
 
@@ -40,7 +46,10 @@ function addItem() {
         li.appendChild(editIcon);
 
         li.onclick = function() {
-            if (li.getAttribute('data-status') === 'undone') {
+            var currentStatus = li.getAttribute('data-status');
+            var filterStatus = document.querySelector('.header .right button.id1').textContent;
+        
+            if (currentStatus === 'undone') {
                 li.setAttribute('data-status', 'done');
                 li.style.textDecorationLine = "line-through";
                 li.classList.add("selected");
@@ -49,6 +58,14 @@ function addItem() {
                 li.style.textDecorationLine = "none";
                 li.classList.remove("selected");
             }
+            if ((filterStatus === "Done" && currentStatus === 'undone') ||
+                (filterStatus === "Undone" && currentStatus === 'done')) {
+                li.style.display = "none";
+                return;
+            }
+        
+            contentList.appendChild(li);
+        
             saveList();
         };
 
@@ -58,6 +75,7 @@ function addItem() {
 
         contentInput.value = ""; 
     }
+    alert("Thêm thành công")
 }
 
 var addButton = document.getElementById("addButton");
@@ -95,6 +113,7 @@ function loadList() {
             deleteIcon.onclick = function() {
                 contentList.removeChild(li); 
                 saveList();
+                alert("Xóa thành công"); 
             };
 
             var editIcon = document.createElement("i");
@@ -113,7 +132,8 @@ function loadList() {
                     saveList();
                     document.getElementById("content").value = "";
                     li.appendChild(deleteIcon); 
-                    li.appendChild(editIcon); 
+                    li.appendChild(editIcon);
+                    alert("Sửa thành công");
                 };
             };
 
@@ -121,21 +141,34 @@ function loadList() {
             li.appendChild(editIcon);
 
             li.onclick = function() {
-                if (li.getAttribute('data-status') === 'undone') {
+                var currentStatus = li.getAttribute('data-status');
+                var filterStatus = document.querySelector('.header .right button.id1').textContent;
+                if (currentStatus === 'undone') {
                     li.setAttribute('data-status', 'done');
                     li.style.textDecorationLine = "line-through";
                     li.classList.add("selected");
                 } else {
                     li.setAttribute('data-status', 'undone');
                     li.style.textDecorationLine = "none";
-                    li.classList.remove("selected")
+                    li.classList.remove("selected");
                 }
+                if ((filterStatus === "Done" && currentStatus === 'done') ||
+                    (filterStatus === "Undone" && currentStatus === 'undone')) {
+                    li.style.display = "none";
+                }else {
+                    li.style.display = "block";
+                }
+            
+                contentList.appendChild(li);
+            
                 saveList();
             };
+            
 
             contentList.appendChild(li); 
         });
     }
+    document.getElementById("id1").click();
 }
 
 function filterItems(status) {
