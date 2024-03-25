@@ -74,8 +74,11 @@ function addItem() {
         saveList();
 
         contentInput.value = ""; 
+        
+        alert("Thêm thành công")
+    }else{
+        alert("Bạn chưa điền gì cả!!")
     }
-    alert("Thêm thành công")
 }
 
 var addButton = document.getElementById("addButton");
